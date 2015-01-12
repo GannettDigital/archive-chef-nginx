@@ -39,3 +39,11 @@ end
 nginx_site 'default' do
   enable node['nginx']['default_site_enabled']
 end
+
+logrotate_app 'nginx' do
+  cookbook  'logrotate'
+  path      '/var/log/nginx/*.log'
+  frequency 'daily'
+  rotate    10
+  create    '644 root adm'
+end
