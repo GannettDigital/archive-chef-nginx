@@ -1,10 +1,11 @@
 #
 # Cookbook Name:: nginx
-# Recipe:: common/conf
+# Attributes:: default
 #
-# Author:: AJ Christensen <aj@junglist.gen.nz>
+# Author:: Adam Jacob (<adam@opscode.com>)
+# Author:: Joshua Timberman (<joshua@opscode.com>)
 #
-# Copyright 2008-2013, Opscode, Inc.
+# Copyright 2009-2013, Opscode, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,23 +20,9 @@
 # limitations under the License.
 #
 
-template 'nginx.conf' do
-  path   "#{node['nginx']['dir']}/nginx.conf"
-  source 'nginx.conf.erb'
-  owner  'root'
-  group  node['root_group']
-  mode   '0644'
-  notifies :reload, 'service[nginx]'
-end
+# In order to update the version, the checksum attribute must be changed too.
+# This attribute is in the source.rb file, though we recommend overriding
+# attributes by modifying a role, or the node itself.
 
-template "#{node['nginx']['dir']}/sites-available/default" do
-  source 'default-site.erb'
-  owner  'root'
-  group  node['root_group']
-  mode   '0644'
-  notifies :reload, 'service[nginx]'
-end
-
-nginx_site 'default' do
-  enable node['nginx']['default_site_enabled']
-end
+default['nginx']['logrotate']['frequency'] = 'daily'
+default['nginx']['logrotate']['rotate'] = '10'

@@ -67,6 +67,7 @@ node.run_state['nginx_configure_flags'] =
   node['nginx']['source']['default_configure_flags'] | node['nginx']['configure_flags']
 
 include_recipe 'nginx::commons_conf'
+include_recipe 'nginx::commons_logrotate'
 
 cookbook_file "#{node['nginx']['dir']}/mime.types" do
   source 'mime.types'
