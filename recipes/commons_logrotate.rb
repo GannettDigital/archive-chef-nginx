@@ -19,23 +19,10 @@
 # limitations under the License.
 #
 
-template 'nginx.conf' do
-  path   "#{node['nginx']['dir']}/nginx.conf"
-  source 'nginx.conf.erb'
-  owner  'root'
-  group  node['root_group']
-  mode   '0644'
-  notifies :reload, 'service[nginx]'
-end
-
-template "#{node['nginx']['dir']}/sites-available/default" do
-  source 'default-site.erb'
-  owner  'root'
-  group  node['root_group']
-  mode   '0644'
-  notifies :reload, 'service[nginx]'
-end
-
-nginx_site 'default' do
-  enable node['nginx']['default_site_enabled']
+logrotate_app 'nginx' do
+  cookbook  'logrotate'
+  path      "#{node['nginx']['log_dir']}/*.log"
+  frequency node['nginx']['logrotate']['frequency']
+  rotate    node['nginx']['logrotate']['rotate']
+  create    "644 #{node['nginx']['user']} #{node['nginx']['group']}"
 end
