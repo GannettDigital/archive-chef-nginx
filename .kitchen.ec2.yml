@@ -29,13 +29,8 @@ platforms:
 suites:
   - name: default
     run_list:
+      - recipe[gd-test-helper::default]
       - recipe[nginx::default]
-  - name: source
-    run_list:
-      - recipe[nginx::default]
-    attributes:
-      nginx:
-        install_method: source
   - name: modules
     run_list:
       - recipe[nginx::source]
