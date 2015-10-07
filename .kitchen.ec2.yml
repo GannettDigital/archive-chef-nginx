@@ -1,15 +1,30 @@
 driver:
-  name: vagrant
+  name: ec2
+  aws_ssh_key_id: <%= ENV['AWS_SSH_KEY'] %>
+  security_group_ids:  <%= ENV['AWS_SECURITY_GROUPS'] %>
+  region: <%= ENV['AWS_REGION'] %>
+  availability_zone: <%= ENV['AWS_AVAILABILITY_ZONE'] %>
+  require_chef_omnibus: true
+  subnet_id: <%= ENV['AWS_SUBNET'] %>
+  instance_type: <%= ENV['INSTANCE_SIZE'] %>
+  associate_public_ip: false
+  interface: private
+  user_data: <%= ENV['USER_DATA_PATH'] %>
+  tags:
+    OWNER: <%= ENV['AWS_OWNER_TAG'] %>
 
 provisioner:
   name: chef_zero
 
+transport:
+  username: <%= ENV['AWS_USERNAME'] %>
+  ssh_key: ~/.ssh/<%= ENV['AWS_SSH_KEY'] %>.pem
+
 platforms:
-  - name: centos-5.10
-  - name: centos-6.6
-  - name: fedora-19
-  - name: ubuntu-10.04
-  - name: ubuntu-12.04
+  - name: <%= ENV['AWS_PLATFORM_NAME'] %>
+    driver:
+      image_id: <%= ENV['AWS_AMI_ID'] %>
+
 
 suites:
   - name: default
@@ -21,13 +36,6 @@ suites:
     attributes:
       nginx:
         install_method: source
-  - name: upstream_repo
-    run_list:
-      - recipe[nginx::repo]
-      - recipe[nginx::default]
-    attributes:
-      nginx:
-        repo_source: nginx
   - name: modules
     run_list:
       - recipe[nginx::source]

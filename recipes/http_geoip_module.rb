@@ -76,7 +76,7 @@ bash 'gunzip_geo_lite_country_dat' do
 end
 
 if node['nginx']['geoip']['enable_city']
-  city_dat  = "#{node['nginx']['geoip']['path']}/GeoLiteCity.dat"
+  city_dat = "#{node['nginx']['geoip']['path']}/GeoLiteCity.dat"
 
   remote_file city_src_filepath do
     not_if do
