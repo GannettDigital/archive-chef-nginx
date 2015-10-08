@@ -4,35 +4,34 @@ require_relative 'spec_helper'
 describe file($node['nginx']['dir']) do
   it { should be_directory }
   it { should be_owned_by 'root' }
-  it { should be_grouped_by 'root' }
+  it { should be_grouped_into 'root' }
   it { should be_mode 755 }
 end
 
 describe file($node['nginx']['log_dir']) do
   it { should be_directory }
-  it { should be_owned_by 'root' }
-  it { should be_grouped_by 'root' }
+  it { should be_owned_by 'nginx' }
   it { should be_mode 755 }
 end
 
 describe file(File.dirname($node['nginx']['pid'])) do
   it { should be_directory }
   it { should be_owned_by 'root' }
-  it { should be_grouped_by 'root' }
+  it { should be_grouped_into 'root' }
   it { should be_mode 755 }
 end
 
 describe file("#{$node['nginx']['dir']}/nginx.conf") do
   it { should be_file }
   it { should be_owned_by 'root' }
-  it { should be_grouped_by 'root' }
+  it { should be_grouped_into 'root' }
   it { should be_mode 644 }
 end
 
 describe file("#{$node['nginx']['dir']}/sites-available/default") do
   it { should be_file }
   it { should be_owned_by 'root' }
-  it { should be_grouped_by 'root' }
+  it { should be_grouped_into 'root' }
   it { should be_mode 644 }
 end
 
