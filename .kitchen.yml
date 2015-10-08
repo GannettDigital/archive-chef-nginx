@@ -6,7 +6,7 @@ provisioner:
 
 platforms:
   - name: centos-5.10
-  - name: centos-6.5
+  - name: centos-6.6
   - name: fedora-19
   - name: ubuntu-10.04
   - name: ubuntu-12.04
@@ -49,3 +49,12 @@ suites:
             - nginx::ngx_lua_module
             - nginx::openssl_source
             - nginx::upload_progress_module
+  - name: other-settings
+    run_list:
+      - recipe[gd-test-helper::default]
+      - recipe[nginx::default]
+      - recipe[nginx::authorized_ips]
+      - recipe[nginx::ipv6]
+      - recipe[nginx::lua]
+      - recipe[nginx::ohai_plugin]
+      - recipe[nginx::openssl_source]

@@ -2,6 +2,10 @@ nginx Cookbook CHANGELOG
 ========================
 This file is used to list changes made in each version of the nginx cookbook.
 
+2.7.6
+-----
+- Kris Vincent - Adding additional serverspec testing
+
 v2.7.5 (Unreleased)
 -------------------
 * Fix nginx 1.4.4 archive checksum to prevent redownload, [#305][] [@irontoby][]
