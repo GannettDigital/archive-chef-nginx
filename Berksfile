@@ -1,4 +1,4 @@
-source 'https://supermarket.getchef.com'
+source 'https://gdp-chef-supermarket.gannettdigital.com'
 metadata
 
 group :integration do
