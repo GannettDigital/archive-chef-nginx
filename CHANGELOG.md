@@ -2,6 +2,11 @@ nginx Cookbook CHANGELOG
 ========================
 This file is used to list changes made in each version of the nginx cookbook.
 
+v2.7.7 / 2016-08-15
+==================
+
+  * Fix logrotate post and prerotate scripts, [PAAS-1317][]
+
 v2.7.6 / 2015-03-17
 ==================
 

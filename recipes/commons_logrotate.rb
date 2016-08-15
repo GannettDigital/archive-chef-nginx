@@ -25,4 +25,11 @@ logrotate_app 'nginx' do
   frequency node['nginx']['logrotate']['frequency']
   rotate    node['nginx']['logrotate']['rotate']
   create    "644 #{node['nginx']['user']} #{node['nginx']['group']}"
+  sharedscripts true
+  prerotate ['if [ -d /etc/logrotate.d/httpd-prerotate ]; then \
+      run-parts /etc/logrotate.d/httpd-prerotate; \
+    fi']
+  postrotate <<-EOF
+    [ -s #{node['nginx']['pid']} ] && kill -USR1 `cat #{node['nginx']['pid']}`
+  EOF
 end
