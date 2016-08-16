@@ -32,4 +32,5 @@ logrotate_app 'nginx' do
   postrotate <<-EOF
     [ -s #{node['nginx']['pid']} ] && kill -USR1 `cat #{node['nginx']['pid']}`
   EOF
+  options ['missingok', 'compress', 'notifempty']
 end

@@ -2,6 +2,11 @@ nginx Cookbook CHANGELOG
 ========================
 This file is used to list changes made in each version of the nginx cookbook.
 
+v2.7.8 / 2016-08-16
+==================
+
+  * Fix logrotate to remove delaycompress and copytruncate, [PAAS-1317][]
+
 v2.7.7 / 2016-08-15
 ==================
 
